@@ -9,7 +9,7 @@ function CartScreen(props) {
     const {cartItems}=cart
     const productId=props.match.params.id;
     const qty=props.location.search ? Number(props.location.search.split("=")[1]):1;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const removeFromCartHandler=(productId)=>{
         console.log('hey iam running',productId)
         dispatch(removeFromCart(productId))

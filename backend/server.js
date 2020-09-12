@@ -4,7 +4,8 @@ const app=express()
 import dotenv from 'dotenv';
 import config from './config';
 import mongoose from 'mongoose';
-import userRoute from './routes/UserRoutes'
+import userRoute from './routes/UserRoutes';
+import productRoute from './routes/ProductRoutes';
 import bodyParser from 'body-parser';
 
 dotenv.config();
@@ -19,22 +20,23 @@ mongoose.connect(mongodbUrl,{
 }).catch(error => console.log(error.reason))
 
 app.use("/api/users",userRoute);
+app.use("/api/products",productRoute);
 
-app.get('/api/products/:id',(req,res)=>{
-    const productId=req.params.id;
+// app.get('/api/products/:id',(req,res)=>{
+//     const productId=req.params.id;
    
-    const product=data.products.find(x=>x._id==productId);
-    if(product){
-        res.send(product)
-    }
-    else{
-        res.status(404).send({msg:'Product Not Found.'})
-    }
-})
+//     const product=data.products.find(x=>x._id==productId);
+//     if(product){
+//         res.send(product)
+//     }
+//     else{
+//         res.status(404).send({msg:'Product Not Found.'})
+//     }
+// })
 
-app.get('/api/products',(req,res)=>{
-    res.send(data.products)
-})
+// app.get('/api/products',(req,res)=>{
+//     res.send(data.products)
+// })
 
 
 
