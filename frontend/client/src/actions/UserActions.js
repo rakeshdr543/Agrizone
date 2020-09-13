@@ -3,11 +3,9 @@ import Cookie from 'js-cookie';
 import { USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNIN_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_FAIL } from '../constants/userConstants';
 
 const signin=(email,password)=>async (dispatch)=>{
-    console.log('action data ',email,password)
     dispatch({type:USER_SIGNIN_REQUEST,payload:{email,password}})
     try {
         const {data}= await axios.post("api/users/signin",{email,password})
-        console.log('next data',data)
         dispatch({type:USER_SIGNIN_SUCCESS,payload:data})
         Cookie.set("userInfo",JSON.stringify(data));
         

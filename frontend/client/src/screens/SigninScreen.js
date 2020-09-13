@@ -12,10 +12,10 @@ const SigninScreen=(props)=> {
  
 
     const dispatch = useDispatch();
-
+    const redirect=props.location.search? props.location.search.split("=")[1]:'/';
     useEffect(() => {
         if(userInfo){
-            props.history.push("/");
+            props.history.push(redirect);
         }
     }, [userInfo])
 
@@ -65,7 +65,7 @@ const SigninScreen=(props)=> {
 
                     </li>
                     <li>
-                        <Link to ="/register" className="button secondary text-center " >Create Agrizone account</Link>
+                        <Link to ={redirect==='/'? "register":"register?redirect="+redirect} className="button secondary text-center " >Create Agrizone account</Link>
                     </li>
                 </ul>
             </form>
