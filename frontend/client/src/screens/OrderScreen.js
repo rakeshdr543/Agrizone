@@ -26,6 +26,7 @@ function OrderScreen(props) {
     }
     const orderDetails=useSelector(state=>state.orderDetails);
     const {loading,order,error}=orderDetails;
+   
     return (
          loading ? <div>Loading...</div>:
         error? <div>{error}</div>:
@@ -85,7 +86,7 @@ function OrderScreen(props) {
                                             </div>
                                         </div>
                                         <div className="cart-price">
-                                            ${item.price}
+                                        ₹{item.price}
 
                                         </div>
                                     </li>)
@@ -109,19 +110,19 @@ function OrderScreen(props) {
                         </li>
                         <li>
                             <div>Items</div>
-                        <div>$ {order.itemPrice}</div>
+                        <div>₹ {order.totalPrice-order.taxPrice-order.shippingPrice}</div>
                         </li>
                         <li>
                         <div>Shipping</div>
-                        <div>${order.shippingPrice}</div>
+                        <div>₹{order.shippingPrice}</div>
                     </li>
                     <li>
                         <div>Tax</div>
-                        <div>${order.taxPrice}</div>
+                        <div>₹{order.taxPrice}</div>
                     </li>
                     <li>
                         <div>Order Total</div>
-                        <div>${order.totalPrice}</div>
+                        <div>₹{order.totalPrice}</div>
                     </li>
                     </ul>
 

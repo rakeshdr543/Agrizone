@@ -37,7 +37,7 @@ a:hover{
 }
 .header{
   grid-area: header;
-  background-color: #203040;
+  background-color: #416422;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -53,6 +53,7 @@ a:hover{
 .header-links a{
   color: #ffffff;
   text-decoration: none;
+  padding: 1rem;
 }
 .header-links a:hover{
   color: #ff8000;
@@ -63,7 +64,7 @@ a:hover{
 }
 .footer{
   grid-area: footer;
-  background-color: #203040;
+  background-color: #416422;
   color: #ffffffff;
   display: flex;
   align-items: center;
@@ -124,7 +125,7 @@ a:hover{
  transition: all 0.5s;
   transform: translateX(-30rem);
   width: 30rem;
-  background-color:#f0f0f0 ;
+  background-color:#b2cb91 ;
   height: 100%;
 }
 .sidebar.open{
@@ -200,7 +201,8 @@ a:hover{
 
 }
 .button.primary{
-  background-color: #f0c040;
+  /* background-color: #f0c040; */
+  background-color:#D9D40C;
 }
 .button.secondary{
   background-color: #f0f0f0;
@@ -376,4 +378,42 @@ tbody>tr:nth-child(odd){
   font-size: 2rem;
   font-weight: bold;
   color: #c04000;
+}
+.placeorder-actions-payment > div {
+  width: 100%;
+}
+
+/* Profile */
+
+.profile {
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.profile-info{
+  flex:1 1 30rem;
+}
+.profile-orders{
+  flex: 3 1 60rem;
+}
+
+/* Admin */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  right:0;
+  padding: 1rem;
+  list-style-type: none;
+  z-index: 1;
+  background-color: #203040;
+  margin:0;
+  margin-top: 0.4rem;
+}
+.dropdown:hover .dropdown-content{
+  display: block;
 }

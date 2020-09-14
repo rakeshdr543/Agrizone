@@ -13,6 +13,7 @@ import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceorderScreen';
 import OrderScreen from './screens/OrderScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
 
@@ -40,11 +41,28 @@ function App() {
                 <Link to='/'> agriZone</Link>
             </div>
             <div className="header-links">
-                <a href="cart.html">
-                    Cart
-                </a>
+            <Link to='/cart' style={{fontSize:'2.5rem'}}>🛒
+            
+                    </Link>
+               
                 {userInfo ? <Link to='/profile'>{userInfo.name}</Link> :
                <Link to='/signin'>Sign In</Link>}
+
+                {
+                  userInfo && userInfo.isAdmin &&(
+                    <div className="dropdown">
+                      <a href='#'>Admin</a>
+                      <ul className="dropdown-content">
+                        <li>
+                          <Link to="/orders">Orders</Link>
+                          <Link to="/products">Products</Link>
+                        </li>
+
+                      </ul>
+                    </div>
+                  )
+                }
+
             </div>
 
         </header>
@@ -52,13 +70,14 @@ function App() {
             <h3>Shopping Catagories</h3>
             <button className="sidebar-close-button" onClick={closeMenu}>x</button>
             <ul>
-                <li><a href="index.html">Pants</a></li>
-                <li><a href="index.html">Shirts</a></li>
+                <li><Link to="/category/organic" >Organic Items</Link></li>
+                <li><Link to="/category/grains" >Food Grains</Link></li>
             </ul>
         </aside>
         <main className='main'>
             <div className="content">
-            <Route path='/products' component={ProductsScreen} />
+            <Route path='/profile' component={ProfileScreen} />
+            <Route path='/products' exact={true} component={ProductsScreen} />
             <Route path='/order/:id' component={OrderScreen} />
             <Route path='/shipping' component={ShippingScreen} />
             <Route path='/payment' component={PaymentScreen} />
@@ -67,7 +86,7 @@ function App() {
               <Route path='/signin' component={SigninScreen} />
             <Route path='/products/:id' component={ProductScreen} />
               <Route path='/' exact={true} component={HomeScreen} />
-              <Route path="/cart/:id?" exact={true} component={CartScreen} />
+              <Route path="/cart/:id?"  component={CartScreen} />
               
 
             

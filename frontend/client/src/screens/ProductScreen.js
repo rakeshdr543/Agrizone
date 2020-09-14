@@ -6,12 +6,12 @@ import { detailsProduct } from '../actions/productActions';
 
  const ProductScreens=(props)=>{
 
-    const [qty,setQty]=useState();
+    const [qty,setQty]=useState(1);
   const productDetails=useSelector(state=>state.productDetails);
   const {product,loading,error}=productDetails;
  const dispatch = useDispatch();
  useEffect(() => {
-    console.log(props.match.params.id)
+    
      dispatch(detailsProduct(props.match.params.id))
      return () => {
          //
@@ -24,7 +24,7 @@ import { detailsProduct } from '../actions/productActions';
     return(
         <div>
             <div className='back-to-result'>
-            <Link to='/' >☚ Back to result</Link>
+            <Link to='/' ><span style={{fontSize:"3.5rem"}}>☚</span> Back to result</Link>
             </div>
             {loading? <div>Loading...</div> :
             error?<div>{error}</div>:
