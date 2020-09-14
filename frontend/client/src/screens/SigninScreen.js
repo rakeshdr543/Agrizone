@@ -21,7 +21,6 @@ const SigninScreen=(props)=> {
 
     const submitHandler=(e)=>{
         e.preventDefault();
-        console.log('my data',email,password)
         dispatch(signin(email,password))
 
         

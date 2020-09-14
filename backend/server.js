@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import userRoute from './routes/UserRoutes';
 import productRoute from './routes/ProductRoutes';
 import bodyParser from 'body-parser';
+import orderRoute from './routes/OrderRoutes';
 
 dotenv.config();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,6 +22,7 @@ mongoose.connect(mongodbUrl,{
 
 app.use("/api/users",userRoute);
 app.use("/api/products",productRoute);
+app.use("/api/orders",orderRoute)
 
 // app.get('/api/products/:id',(req,res)=>{
 //     const productId=req.params.id;
