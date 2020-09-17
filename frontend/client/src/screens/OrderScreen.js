@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {createOrder, detailsOrder, payOrder } from '../actions/orderActions';
 import { useEffect } from 'react';
-import PaypalButton from '../components/PaypalButton';
+import PaytmButton from '../components/PaytmButton';
 
 
 function OrderScreen(props) {
@@ -99,7 +99,7 @@ function OrderScreen(props) {
                         <li className="placeorder-actions-payment">
                             {loading && <div>Finishing Payment...</div>}
                             {!order.isPaid && 
-                            <PaypalButton
+                            <PaytmButton
                             amount={order.totalPrice}
                             onSuccess={handleSuccessPayment} />
                             }

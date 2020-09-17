@@ -20,6 +20,7 @@ router.post("/",isAuth, async(req,res)=>{
     res.status(201).send({message:"New Order Created",data:newOrderCreated})
 });
 
+
 router.get("/mine",isAuth,async(req,res)=>{
     const orders=await Order.find({user:req.user._id});
     res.send(orders)

@@ -4,22 +4,42 @@ import {Link} from 'react-router-dom';
 
 
 import { listProducts } from '../actions/productActions';
+import Rating from '../components/Rating';
 
  const HomeScreens=(props)=>{
- 
+   const [searchKeyword,setSearchKeyword]=useState('');
+  const category = props.match.params.id ? props.match.params.id:'';
    const productList=useSelector(state => state.productList)
    const {products,loading,error} =productList;
    const dispatch = useDispatch();
 
 
    useEffect(() => {
-     dispatch(listProducts());
+     dispatch(listProducts(category))
    
-   }, [])
+   }, [category])
+   const submitHandler=(e)=>{
+     e.preventDefault();
+     dispatch(listProducts(category,searchKeyword));
+   }
   
 
     return(
-      loading ? (<div>Loading</div>):
+      <>
+      {category && <h2>{category}</h2>}
+      <ul className='filter'>
+        <li>
+          <form onSubmit={submitHandler}>
+            <input name='searchKeyword'
+            onChange={(e)=>setSearchKeyword(e.target.value)}
+            />
+            <button type="submit">Search</button>
+          </form>
+        </li>
+
+      </ul>
+
+     { loading ? (<div>Loading...</div>):
     error ? <div>{error}</div>:
         <ul className="products">
               {
@@ -32,7 +52,14 @@ import { listProducts } from '../actions/productActions';
                       </Link>
                 <div className="product-brands">{product.brand}</div>
                 <div className="product-price">₹ {product.price}</div>
-                      <div className="product-rating">{product.rating} Stars ( {product.numReviews} Reviews)</div>
+                      <div className="product-rating">
+                        <Rating value={product.raing}
+                        text={product.numReviews +' reviews'}
+                        />
+
+
+                        {/* {product.rating} Stars ( {product.numReviews} Reviews)*/}
+                        </div> 
                   </div>
               </li>
 
@@ -43,7 +70,8 @@ import { listProducts } from '../actions/productActions';
                
                
                 
-            </ul>
+            </ul>}
+            </>
 
     )
  }

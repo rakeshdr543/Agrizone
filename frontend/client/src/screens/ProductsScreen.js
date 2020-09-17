@@ -77,7 +77,7 @@ const ProductsScreen=(props)=> {
                 <ul className="form-container">
                     <li>
                         <h2>
-                            Create Product
+                            Manage Product
                         </h2>
                     </li>
                     <li>

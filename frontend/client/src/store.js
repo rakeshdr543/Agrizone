@@ -1,9 +1,9 @@
 import {createStore,combineReducers, compose, applyMiddleware} from 'redux';
-import { productListReducer, productDetailsReducer, productSaveReducer, productDeleteReducer } from './reducer/productReducer';
+import { productListReducer, productDetailsReducer, productSaveReducer, productDeleteReducer, productReviewSaveReducer } from './reducer/productReducer';
 import {cartReducer} from './reducer/cartReducers';
 import Cookie from 'js-cookie';
 import thunk from 'redux-thunk';
-import { userSigninReducer, userRegisterReducer, userUpdateReducer } from './reducer/userReducers';
+import { userSigninReducer, userRegisterReducer, userUpdateReducer, farmerRegisterReducer } from './reducer/userReducers';
 import { myOrderListReducer, orderCreateReducer, orderDetailsReducer, orderPayReducer } from './reducer/orderReducers';
 
 const cartItems=Cookie.getJSON("cartItems")|| [];
@@ -17,13 +17,15 @@ const reducer=combineReducers({
     cart:cartReducer,
     userSignin:userSigninReducer,
     userRegister:userRegisterReducer,
+    farmerRegister:farmerRegisterReducer,
     userUpdate:userUpdateReducer,
     productSave:productSaveReducer,
     productDelete:productDeleteReducer,
     orderCreate:orderCreateReducer,
     orderDetails:orderDetailsReducer,
     orderPay:orderPayReducer,
-    myOrderList:myOrderListReducer
+    myOrderList:myOrderListReducer,
+    productReviewSave:productReviewSaveReducer
 
 })
 const composeEnhancer=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

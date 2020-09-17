@@ -1,11 +1,11 @@
 import React from 'react'
 
-function PaypalButton() {
+function AboutScreen() {
     return (
         <div>
-            PayPal
+            
         </div>
     )
 }
 
-export default PaypalButton
+export default AboutScreen

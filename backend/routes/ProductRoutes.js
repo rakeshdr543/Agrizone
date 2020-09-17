@@ -4,8 +4,17 @@ import Product from '../model/productModel';
 import { isAdmin, isAuth } from '../util';
 
 router.get("/", async(req,res)=>{
-    const products=await Product.find({});
-    res.send(products);
+    const category=req.query.category ? {category:req.query.category}:{};
+    const searchKeyword=req.query.searchKeywords
+    ?{
+        name:{
+            $regex:req.query.searchKeywords,
+            $options:'i',
+        },
+    }:{};
+    const products=await Product.find({...category,...searchKeyword});
+    res.send(products)
+
 })
 
 router.get("/:id",async(req,res)=>
@@ -68,6 +77,53 @@ router.delete('/:id', isAuth,isAdmin,async (req,res)=>{
         res.send("Error in deletion")
     }
 })
+
+// router.post('/:id/reviews',isAuth,async (req,res)=>{
+//     const product=await Product.findById(req.params.id);
+//     if(product){
+//         const review={
+//             name:req.body.name,
+//             rating:Number(req.body.rating),
+//             comment:req.body.comment
+//         };
+//         product.reviews.push(review);
+//         product.numReviews=product.reviews.length;
+//         product.rating=product.reviews.reduce((a,c)=>c.rating+a,0)/product.reviews.length;
+//         const updatedProduct=await product.save();
+//         res.status(201).send({data:updatedProduct.reviews[updatedProduct.reviews.length-1],
+//         message:'Review saved successfully.'
+//         });
+//     }
+//     else{
+//         res.status(404).send({message:'Product Not Found'})
+//     }
+    
+// })
+
+router.post('/:id/reviews', isAuth, async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (product) {
+      const review = {
+        name: req.body.name,
+        rating: Number(req.body.rating),
+        comment: req.body.comment,
+      };
+      product.reviews.push(review);
+      product.numReviews = product.reviews.length;
+      product.rating =
+        product.reviews.reduce((a, c) => c.rating + a, 0) /
+        product.reviews.length;
+      const updatedProduct = await product.save();
+      res.status(201).send({
+        data: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+        message: 'Review saved successfully.',
+      });
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+  });
+
+
 
 
 export default router;

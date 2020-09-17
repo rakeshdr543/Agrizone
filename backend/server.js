@@ -9,11 +9,13 @@ import productRoute from './routes/ProductRoutes';
 import bodyParser from 'body-parser';
 import orderRoute from './routes/OrderRoutes';
 
+const PORT=process.env.PORT || 8080
+
 dotenv.config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
-const mongodbUrl=config.MONGODB_URL;
+const mongodbUrl=process.env.MONGODB_URL || config.MONGODB_URL;
 mongoose.connect(mongodbUrl,{
     useNewUrlParser:true,
     useUnifiedTopology: true,
@@ -42,6 +44,6 @@ app.use("/api/orders",orderRoute)
 
 
 
-app.listen(8000,()=>{
-    console.log('server is running at https://localhost8000')
+app.listen(PORT,()=>{
+    console.log(`server is running at ${PORT} `)
 })
